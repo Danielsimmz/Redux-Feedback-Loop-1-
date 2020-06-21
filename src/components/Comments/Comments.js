@@ -2,15 +2,8 @@ import React, { Component } from "react";
 //import axios from "axios";
 //import { connect } from "react-redux";
 import { withRouter } from "react-router";
-
-
-class Understanding extends Component {
-  //this is the function for the next button that takes
-  //the user to the next page in the process
-    next = (event) => {
-    event.preventDefault();
-    this.props.history.push("/supported");
-  };
+//this component is for taking input on how the user feels supported
+class Comments extends Component {
   render() {
     return (
       <div>
@@ -21,14 +14,11 @@ class Understanding extends Component {
           </h4>
         </header>
         <p>
-          <b>How well are you understanding the content</b>
+          <b>Any comments you want to leave</b>
         </p>
         <form onSubmit={this.next}>
           <input
-            placeholder="Choose from 1-10"
-            type="number"
-            min="1"
-            max="10"
+            placeholder="Add comments"
           ></input>
           {/*<select>
             <menuitem value="number">Delivery</menuitem>
@@ -42,4 +32,4 @@ class Understanding extends Component {
   }
 }
 
-export default withRouter(Understanding);
+export default withRouter(Comments);

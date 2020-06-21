@@ -18,11 +18,13 @@ class Feeling extends Component {
             <i>Don't forget it!</i>
           </h4>
         </header>
-        <p>How are you feeling?</p>
+        <p>
+          <b>How are you feeling?</b>
+        </p>
         <form onSubmit={this.next}>
           <input
             type="number"
-            min="0"
+            min="1"
             max="10"
             placeholder="Choose from 1-10"
           ></input>

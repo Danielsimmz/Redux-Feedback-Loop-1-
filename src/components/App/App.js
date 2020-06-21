@@ -3,12 +3,15 @@ import React, { Component } from 'react';
 import './App.css';
 //import { connect } from "react-redux";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
+//import all the components:
 import Feeling from "../Feeling/Feeling";
 import Understanding from '../Understanding/Understanding';
+import Supported from '../Supported/Supported';
 
 class App extends Component {
   render() {
     return (
+      //setup routes for the different page forms
       <Router>
         <div className="App">
           <Switch>
@@ -18,11 +21,10 @@ class App extends Component {
             <Route path="/understanding">
               <Understanding />
             </Route>
+            <Route path="/supported">
+              <Supported />
+            </Route>
           </Switch>
-          {/* <header className="App-header">
-          <h1 className="App-title">Feedback!</h1>
-          <h4><i>Don't forget it!</i></h4>
-        </header> */}
           <br />
         </div>
       </Router>
