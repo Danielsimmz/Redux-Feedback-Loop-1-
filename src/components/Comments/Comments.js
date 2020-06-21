@@ -4,6 +4,14 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 //this component is for taking input on how the user feels supported
 class Comments extends Component {
+  
+    //this function takes you ro the next page in the steps
+    next = (event) => {
+    event.preventDefault();
+    this.props.history.push("/review");
+  };
+
+  //this function takes you back to the previous page in the steps
   previous = (event) => {
     event.preventDefault();
     this.props.history.push("/supported");

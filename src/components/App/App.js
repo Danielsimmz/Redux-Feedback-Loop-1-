@@ -8,6 +8,7 @@ import Feeling from "../Feeling/Feeling";
 import Understanding from '../Understanding/Understanding';
 import Supported from '../Supported/Supported';
 import Comments from '../Comments/Comments';
+import ReviewForm from '../ReviewForm/ReviewForm';
 
 class App extends Component {
   render() {
@@ -27,6 +28,9 @@ class App extends Component {
             </Route>
             <Route path="/comments">
               <Comments />
+            </Route>
+            <Route path="/review">
+              <ReviewForm />
             </Route>
           </Switch>
           <br />
