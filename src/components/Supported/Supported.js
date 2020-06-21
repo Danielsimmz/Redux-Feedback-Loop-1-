@@ -4,6 +4,16 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 //this component is for taking input on how the user feels supported
 class Supported extends Component {
+  next = (event) => {
+    event.preventDefault();
+    this.props.history.push("/comments");
+  };
+
+  //this function takes user to previous page
+  previous = (event) => {
+    event.preventDefault();
+    this.props.history.push("/understanding");
+  };
   render() {
     return (
       <div>
@@ -17,6 +27,9 @@ class Supported extends Component {
           <b>How well are you being supported</b>
         </p>
         <form onSubmit={this.next}>
+          <button variant="container" color="primary" onClick={this.previous}>
+            Previous
+          </button>
           <input
             placeholder="Choose from 1-10"
             type="number"

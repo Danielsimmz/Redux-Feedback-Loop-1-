@@ -4,6 +4,10 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 //this component is for taking input on how the user feels supported
 class Comments extends Component {
+  previous = (event) => {
+    event.preventDefault();
+    this.props.history.push("/supported");
+  };
   render() {
     return (
       <div>
@@ -17,12 +21,10 @@ class Comments extends Component {
           <b>Any comments you want to leave</b>
         </p>
         <form onSubmit={this.next}>
-          <input
-            placeholder="Add comments"
-          ></input>
-          {/*<select>
-            <menuitem value="number">Delivery</menuitem>
-          </select>*/}
+          <button variant="container" color="primary" onClick={this.previous}>
+            Previous
+          </button>
+          <input placeholder="Add comments"></input>
           <button id="review" variant="container" color="primary" type="submit">
             Next
           </button>

@@ -7,6 +7,7 @@ import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Feeling from "../Feeling/Feeling";
 import Understanding from '../Understanding/Understanding';
 import Supported from '../Supported/Supported';
+import Comments from '../Comments/Comments';
 
 class App extends Component {
   render() {
@@ -23,6 +24,9 @@ class App extends Component {
             </Route>
             <Route path="/supported">
               <Supported />
+            </Route>
+            <Route path="/comments">
+              <Comments />
             </Route>
           </Switch>
           <br />
