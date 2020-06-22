@@ -16,6 +16,7 @@ The parts:
 -make understanding component
 -make support component
 -make comments component
+-make reviewform component
 
 ## Step 3 Setup Server side and connect to database
-setup 
+-connect the pool to database

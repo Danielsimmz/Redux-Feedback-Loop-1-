@@ -11,6 +11,22 @@ import Comments from '../Comments/Comments';
 import ReviewForm from '../ReviewForm/ReviewForm';
 
 class App extends Component {
+  // refreshPizzas gets the pizzas from the database and adds them to the Redux state
+  // getFeedback = () => {
+  //   // grab the dispatch function from props
+  //   const { dispatch } = this.props;
+
+  //   // axios server request
+  //   axios
+  //     .get("/feedback")
+  //     .then((response) => {
+  //       dispatch({ type: "GET_PIZZAS", payload: response.data });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }; // end refreshPizzas
+
   render() {
     return (
       //setup routes for the different page forms
