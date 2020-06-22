@@ -4,34 +4,39 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
 class Feeling extends Component {
+//this is the function for the next button that takes
+  //the user to the next page in the process
   next = (event) => {
     event.preventDefault();
     this.props.history.push("/understanding");
   };
+
+  //set state to local variable
   state = {
     input: {
-      feeling: ""
-    }
-  }
+      feeling: "",
+    },
+  };
 
+  //capture input value
   handleChange = (event) => {
     this.setState({
       input: {
-        feeling: event.target.value
-      }
-    })
-  }
-
-  handleSubmit = () => {
-    const {dispatch} = this.props;
-    dispatch({ type: 'GET_FEELING', payload: this.state.input});
-    //reset the state
+        feeling: Number(event.target.value),
+      },
+    });
+  };
+  //store input value in global state
+  handleClick = () => {
+    const { dispatch } = this.props;
+    dispatch({ type: "GET_FEELING", payload: this.state.input });
+    //reset the state after submission
     this.setState({
       input: {
-        feeling: ""
-      }
-    })
-  }
+        feeling: "",
+      },
+    });
+  };
   render() {
     return (
       <div>
@@ -46,18 +51,22 @@ class Feeling extends Component {
         </p>
         <form onSubmit={this.next}>
           <input
-          value={this.state.input.feeling}
-            type="number"
+            value={this.state.input.feeling}
+            //type="number"
             min="1"
             max="10"
             placeholder="Choose from 1-10"
-            onChange={this}
+            onChange={this.handleChange}
           ></input>
           {/*<select>
             <menuitem value="number">Delivery</menuitem>
           </select>*/}
-          <button id="review" color="primary" type="submit"
-          onClick={(event) => this.handleSubmit()}>
+          <button
+            id="review"
+            color="primary"
+            type="submit"
+            onClick={(event) => this.handleClick(event)}
+          >
             Next
           </button>
         </form>

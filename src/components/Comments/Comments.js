@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 //import axios from "axios";
-//import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
 //this component is for taking input on how the user feels supported
 class Comments extends Component {
-  
-    //this function takes you ro the next page in the steps
-    next = (event) => {
+  //this function takes you ro the next page in the steps
+  next = (event) => {
     event.preventDefault();
     this.props.history.push("/review");
   };
@@ -15,6 +14,33 @@ class Comments extends Component {
   previous = (event) => {
     event.preventDefault();
     this.props.history.push("/supported");
+  };
+
+  //set state to local variable
+  state = {
+    input: {
+      support: "",
+    },
+  };
+
+  //capture input value
+  handleChange = (event) => {
+    this.setState({
+      input: {
+        comments: event.target.value,
+      },
+    });
+  };
+  //store input value in global state
+  handleClick = () => {
+    const { dispatch } = this.props;
+    dispatch({ type: "GET_COMMENTS", payload: this.state.input });
+    //reset the state
+    this.setState({
+      input: {
+        comments: "",
+      },
+    });
   };
   render() {
     return (
@@ -32,8 +58,17 @@ class Comments extends Component {
           <button variant="container" color="primary" onClick={this.previous}>
             Previous
           </button>
-          <input placeholder="Add comments"></input>
-          <button id="review" variant="container" color="primary" type="submit">
+          <input
+            placeholder="Add comments"
+            onChange={this.handleChange}
+          ></input>
+          <button
+            id="review"
+            variant="container"
+            color="primary"
+            type="submit"
+            onClick={(event) => this.handleClick(event)}
+          >
             Next
           </button>
         </form>
@@ -42,4 +77,4 @@ class Comments extends Component {
   }
 }
 
-export default withRouter(Comments);
+export default withRouter(connect()(Comments));

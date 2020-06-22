@@ -8,6 +8,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 
+//these are our dispatch actions
 //put feedback from database onto page (GET)
 const feedbackReducer = (state = [], action) => {
   let newState = [...state];
@@ -25,7 +26,7 @@ const feedbackReducer = (state = [], action) => {
   }
   return newState;
 };
-
+//creating our store
 const storeInstance = createStore(
   combineReducers({
     feedback: feedbackReducer,

@@ -12,30 +12,34 @@ class Understanding extends Component {
     this.props.history.push("/supported");
   };
 
+  //set state to local variable
   state = {
     input: {
       understanding: "",
     },
   };
-
+  //capture the input target
   handleChange = (event) => {
     this.setState({
       input: {
-        understanding: event.target.value,
+        understanding: Number(event.target.value),
       },
     });
   };
-
-  handleSubmit = () => {
-    const { dispatch } = this.props;
-    dispatch({ type: "GET_UNDERSTANDING", payload: this.state.input });
-    //reset the state
-    this.setState({
-      input: {
-        understanding: "",
-      },
-    });
-  };
+  //store input value in global state
+  handleClick = () => {
+                        const { dispatch } = this.props;
+                        dispatch({
+                          type: "GET_UNDERSTANDING",
+                          payload: this.state.input,
+                        });
+                        //reset the state after submission
+                        this.setState({
+                          input: {
+                            understanding: "",
+                          },
+                        });
+                      };
   //this function takes user to previous page
   previous = (event) => {
     event.preventDefault();
@@ -59,9 +63,10 @@ class Understanding extends Component {
           </button>
           <input
             placeholder="Choose from 1-10"
-            type="number"
+            //type="number"
             min="1"
             max="10"
+            onChange={this.handleChange}
           ></input>
           {/*<select>
             <menuitem value="number">Delivery</menuitem>
@@ -71,7 +76,7 @@ class Understanding extends Component {
             variant="container"
             color="primary"
             type="submit"
-            onClick={(event) => this.handleSubmit()}
+            onClick={(event) => this.handleClick(event)}
           >
             Next
           </button>

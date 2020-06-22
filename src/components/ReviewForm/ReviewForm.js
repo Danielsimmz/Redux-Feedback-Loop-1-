@@ -18,6 +18,7 @@ class ReviewForm extends Component {
   };
   render() {
       const { feedback } = this.props;
+      const { feeling, understanding, support, comments } = this.props.feedback;
     return (
       <div>
         <h2>Review your feedback</h2>
@@ -25,7 +26,7 @@ class ReviewForm extends Component {
           {/*<button variant="container" color="primary" onClick={this.previous}>
             Previous
     </button>*/}
-    {feedback.map((feedbacks, index) => {
+     {feedback.map((feedbacks, index) => {
         return (
             <ul>
                 <li key={`feedbacks-input${index}`}>Feeling:{feedbacks.feeling}

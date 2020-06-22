@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import axios from "axios";
-//import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
 //this component is for taking input on how the user feels supported
 class Supported extends Component {
@@ -13,6 +13,33 @@ class Supported extends Component {
   previous = (event) => {
     event.preventDefault();
     this.props.history.push("/understanding");
+  };
+  
+  //set state to local variable
+  state = {
+    input: {
+      support: "",
+    },
+  };
+
+  //capture input value
+  handleChange = (event) => {
+    this.setState({
+      input: {
+        support: Number(event.target.value),
+      },
+    });
+  };
+  //store input value in global state
+  handleClick = () => {
+    const { dispatch } = this.props;
+    dispatch({ type: "GET_SUPPORT", payload: this.state.input });
+    //reset the state
+    this.setState({
+      input: {
+        support: "",
+      },
+    });
   };
   render() {
     return (
@@ -32,14 +59,21 @@ class Supported extends Component {
           </button>
           <input
             placeholder="Choose from 1-10"
-            type="number"
+            //type="number"
             min="1"
             max="10"
+            onChange={this.handleChange}
           ></input>
           {/*<select>
             <menuitem value="number">Delivery</menuitem>
           </select>*/}
-          <button id="review" variant="container" color="primary" type="submit">
+          <button
+            id="review"
+            variant="container"
+            color="primary"
+            type="submit"
+            onClick={(event) => this.handleClick(event)}
+          >
             Next
           </button>
         </form>
@@ -48,4 +82,4 @@ class Supported extends Component {
   }
 }
 
-export default withRouter(Supported);
+export default withRouter(connect()(Supported));
