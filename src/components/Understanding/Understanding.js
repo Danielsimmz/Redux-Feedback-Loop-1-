@@ -57,6 +57,7 @@ class Understanding extends Component {
         <p>
           <b>How well are you understanding the content</b>
         </p>
+        {/*on submission this form will take you to the next page in the process */}
         <form onSubmit={this.next}>
           <button variant="container" color="primary" onClick={this.previous}>
             Previous

@@ -16,9 +16,47 @@ class ReviewForm extends Component {
     event.preventDefault();
     this.props.history.push("/");
   };
+//this function loops through the array of feedback and 
+  postFeedback =() => {
+    const { feedback } = this.props;
+    let feeling = '';
+    let understanding = '';
+    let support = '';
+    let comments = '';
+    for (let obj of feedback){
+        if (obj.feeling){
+            feeling = obj.feeling
+        }
+        if (obj.understanding) {
+          feeling = obj.understanding;
+        }
+        if (obj.support) {
+          feeling = obj.support;
+        }
+        if (obj.comments) {
+          feeling = obj.comments;
+        }
+    }
+    const feedbackEntry = {
+      feeling: feeling,
+      understanding: understanding,
+      support: support,
+      comments: comments,
+    };
+    console.log(`FEEDBACK POST IS: `, feedbackEntry);
+    axios.post('/feedback', feedbackEntry)
+          .then(() =>{
+            console.log('SENDING:', feedbackEntry);
+            //clear global state
+            this.props.dispatch({ type: 'GET_FEEDBACK', payload: [ ]});
+          }).catch((error) => {
+              console.log('SORRY, couldnt send post', error);
+          });
+      }
+    
   render() {
-      const { feedback } = this.props;
-      const { feeling, understanding, support, comments } = this.props.feedback;
+      
+    //   const { feeling, understanding, support, comments } = this.props.feedback;
     return (
       <div>
         <h2>Review your feedback</h2>
@@ -26,7 +64,7 @@ class ReviewForm extends Component {
           {/*<button variant="container" color="primary" onClick={this.previous}>
             Previous
     </button>*/}
-     {feedback.map((feedbacks, index) => {
+     {this.props.feedback.map((feedbacks, index) => {
         return (
             <ul>
                 <li key={`feedbacks-input${index}`}>Feeling:{feedbacks.feeling}
@@ -62,7 +100,7 @@ const mapStateToProps = (state) => {
     // what we care about. then return that object, which
     // will then be passed in as a prop of the same name.
     // pull feedback from Redux store
-    feedback: state.feedback,
+    feedback: state.feedbackReducer,
   };
 };
 

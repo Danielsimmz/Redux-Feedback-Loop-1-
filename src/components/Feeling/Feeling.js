@@ -49,6 +49,7 @@ class Feeling extends Component {
         <p>
           <b>How are you feeling?</b>
         </p>
+        {/*on submission this form will take you to the next page in the process */}
         <form onSubmit={this.next}>
           <input
             value={this.state.input.feeling}
