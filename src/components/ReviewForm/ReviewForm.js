@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-//import axios from "axios";
-//import { connect } from "react-redux";
+import axios from "axios";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
 class ReviewForm extends Component {
@@ -17,6 +17,7 @@ class ReviewForm extends Component {
     this.props.history.push("/");
   };
   render() {
+      const { feedback } = this.props;
     return (
       <div>
         <h2>Review your feedback</h2>
@@ -24,12 +25,23 @@ class ReviewForm extends Component {
           {/*<button variant="container" color="primary" onClick={this.previous}>
             Previous
     </button>*/}
-          <ul>
+    {feedback.map((feedbacks, index) => {
+        return (
+            <ul>
+                <li key={`feedbacks-input${index}`}>Feeling:{feedbacks.feeling}
+                <br/>Understanding:{feedbacks.understanding}
+                <br/>Support:{feedbacks.support}
+                <br/>Comments:{feedbacks.comments}
+                </li>
+            </ul>
+        )
+    })}
+          {/* <ul>
             <li>Feeling: 5</li>
             <li>Understanding: 5</li>
             <li>Supported: 5</li>
             <li>Comments: Wadinda</li>
-          </ul>
+          </ul> */}
           {/*<select>
             <menuitem value="number">Delivery</menuitem>
           </select>*/}
@@ -43,4 +55,14 @@ class ReviewForm extends Component {
   }
 }
 
-export default withRouter(ReviewForm);
+const mapStateToProps = (state) => {
+  return {
+    // we have to take the global state, and only pull out
+    // what we care about. then return that object, which
+    // will then be passed in as a prop of the same name.
+    // pull feedback from Redux store
+    feedback: state.feedback,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(ReviewForm));

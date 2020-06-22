@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 import './App.css';
-//import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 //import all the components:
 import Feeling from "../Feeling/Feeling";
@@ -11,21 +11,21 @@ import Comments from '../Comments/Comments';
 import ReviewForm from '../ReviewForm/ReviewForm';
 
 class App extends Component {
-  // refreshPizzas gets the pizzas from the database and adds them to the Redux state
-  // getFeedback = () => {
-  //   // grab the dispatch function from props
-  //   const { dispatch } = this.props;
+  //getFeedback gets the feedback from the database and adds them to the Redux state
+  getFeedback = () => {
+    // grab the dispatch function from props
+    const { dispatch } = this.props;
 
-  //   // axios server request
-  //   axios
-  //     .get("/feedback")
-  //     .then((response) => {
-  //       dispatch({ type: "GET_PIZZAS", payload: response.data });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }; // end refreshPizzas
+    // axios server request
+    axios
+      .get("/feedback")
+      .then((response) => {
+        dispatch({ type: "GET_FEEDBACK", payload: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }; // end getFeedback
 
   render() {
     return (
@@ -46,7 +46,7 @@ class App extends Component {
               <Comments />
             </Route>
             <Route path="/review">
-              <ReviewForm />
+              <ReviewForm getFeedback={this.getFeedback} />
             </Route>
           </Switch>
           <br />
@@ -56,4 +56,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);

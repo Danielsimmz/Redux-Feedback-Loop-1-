@@ -23,7 +23,24 @@ router.post("/", (req, res) => {
     const obj = req.body
 
     //insert into the database
-    
+    const insertData = `INSERT INTO "feedback"
+    ("feeling", "understanding", "support", "comments")
+    VALUES($1, $2, $3, $4);`;
+    const enterFeedback = [obj.feeling, obj.understanding,
+    obj.support, obj.comments];
+    //send to database
+    pool
+    .query(insertData, enterFeedback)
+    .then((result) =>{
+        console.log(result);
+        //if successful send status message
+        res.status(201);
+    })
+    .catch((error) => {
+        console.log(`Error making entry ${insertData}`, error);
+    //if unsuccessful send status message
+    res.sendStatus(500);        
+    });
 });
 
 module.exports = router;

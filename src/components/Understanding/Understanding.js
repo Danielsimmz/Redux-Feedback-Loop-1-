@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import axios from "axios";
-//import { connect } from "react-redux";
+import { connect } from "react-redux";
 import { withRouter } from "react-router";
 
 
@@ -12,6 +12,30 @@ class Understanding extends Component {
     this.props.history.push("/supported");
   };
 
+  state = {
+    input: {
+      understanding: "",
+    },
+  };
+
+  handleChange = (event) => {
+    this.setState({
+      input: {
+        understanding: event.target.value,
+      },
+    });
+  };
+
+  handleSubmit = () => {
+    const { dispatch } = this.props;
+    dispatch({ type: "GET_UNDERSTANDING", payload: this.state.input });
+    //reset the state
+    this.setState({
+      input: {
+        understanding: "",
+      },
+    });
+  };
   //this function takes user to previous page
   previous = (event) => {
     event.preventDefault();
@@ -42,7 +66,13 @@ class Understanding extends Component {
           {/*<select>
             <menuitem value="number">Delivery</menuitem>
           </select>*/}
-          <button id="review" variant="container" color="primary" type="submit">
+          <button
+            id="review"
+            variant="container"
+            color="primary"
+            type="submit"
+            onClick={(event) => this.handleSubmit()}
+          >
             Next
           </button>
         </form>
@@ -51,4 +81,4 @@ class Understanding extends Component {
   }
 }
 
-export default withRouter(Understanding);
+export default withRouter(connect()(Understanding));
