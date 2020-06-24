@@ -19,7 +19,7 @@ class Comments extends Component {
   //set state to local variable
   state = {
     input: {
-      support: "",
+      comments: "",
     },
   };
 
@@ -34,7 +34,8 @@ class Comments extends Component {
   //store input value in global state
   handleClick = () => {
     const { dispatch } = this.props;
-    dispatch({ type: "GET_COMMENTS", payload: this.state.input });
+    dispatch({ type: "GET_COMMENTS", payload: this.state.input.comments });
+    console.log(this.state.input);
     //reset the state
     this.setState({
       input: {

@@ -18,7 +18,7 @@ class Supported extends Component {
   //set state to local variable
   state = {
     input: {
-      support: "",
+      support: 0,
     },
   };
 
@@ -33,11 +33,12 @@ class Supported extends Component {
   //store input value in global state
   handleClick = () => {
     const { dispatch } = this.props;
-    dispatch({ type: "GET_SUPPORT", payload: this.state.input });
+    dispatch({ type: "GET_SUPPORT", payload: this.state.input.support });
+    console.log(this.state.input);
     //reset the state
     this.setState({
       input: {
-        support: "",
+        support: 0,
       },
     });
   };
@@ -60,8 +61,8 @@ class Supported extends Component {
           </button>
           <input
             placeholder="Choose from 1-10"
-            //type="number"
-            min="1"
+            type="number"
+            min="0"
             max="10"
             onChange={this.handleChange}
           ></input>

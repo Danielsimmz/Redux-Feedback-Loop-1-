@@ -8,53 +8,32 @@ class ReviewForm extends Component {
   //the user to the next page in the process
   next = (event) => {
     event.preventDefault();
-    this.props.history.push("/supported");
+    this.props.history.push("/");
   };
 
   //this function takes user to previous page
   previous = (event) => {
     event.preventDefault();
-    this.props.history.push("/");
+    this.props.history.push("/comments");
   };
 //this function loops through the array of feedback and 
   postFeedback =() => {
-    const { feedback } = this.props;
-    let feeling = '';
-    let understanding = '';
-    let support = '';
-    let comments = '';
-    for (let obj of feedback){
-        if (obj.feeling){
-            feeling = obj.feeling
-        }
-        if (obj.understanding) {
-          feeling = obj.understanding;
-        }
-        if (obj.support) {
-          feeling = obj.support;
-        }
-        if (obj.comments) {
-          feeling = obj.comments;
-        }
-    }
-    const feedbackEntry = {
-      feeling: feeling,
-      understanding: understanding,
-      support: support,
-      comments: comments,
-    };
-    console.log(`FEEDBACK POST IS: `, feedbackEntry);
-    axios.post('/feedback', feedbackEntry)
-          .then(() =>{
-            console.log('SENDING:', feedbackEntry);
-            //clear global state
-            this.props.dispatch({ type: 'GET_FEEDBACK', payload: [ ]});
-          }).catch((error) => {
-              console.log('SORRY, couldnt send post', error);
-          });
+    
+    console.log(`FEEDBACK POST IS: `, this.props.feedback);
+    axios
+      .post("/feedback", this.props.feedback)
+      .then(() => {
+        console.log("SENDING:", this.props.feedback);
+        //clear global state
+        // this.props.dispatch({ type: 'GET_FEEDBACK', payload:this.props.feedback });
+      })
+      .catch((error) => {
+        console.log("SORRY, couldnt send post", error);
+      });
       }
     
   render() {
+      console.log(this.props.feedback);
       
     //   const { feeling, understanding, support, comments } = this.props.feedback;
     return (
@@ -64,17 +43,17 @@ class ReviewForm extends Component {
           {/*<button variant="container" color="primary" onClick={this.previous}>
             Previous
     </button>*/}
-     {this.props.feedback.map((feedbacks, index) => {
-        return (
+     {/* {this.props.feedback.map((feedbacks, index) => {
+        return ( */}
             <ul>
-                <li key={`feedbacks-input${index}`}>Feeling:{feedbacks.feeling}
-                <br/>Understanding:{feedbacks.understanding}
-                <br/>Support:{feedbacks.support}
-                <br/>Comments:{feedbacks.comments}
+                <li >Feeling: {this.props.feedback.feeling}
+                <br/>Understanding: {this.props.feedback.understanding}
+                <br/>Support: {this.props.feedback.support}
+                <br/>Comments: {this.props.feedback.comments}
                 </li>
             </ul>
-        )
-    })}
+        {/* )
+    })} */}
           {/* <ul>
             <li>Feeling: 5</li>
             <li>Understanding: 5</li>
@@ -85,7 +64,7 @@ class ReviewForm extends Component {
             <menuitem value="number">Delivery</menuitem>
           </select>*/}
           <br />
-          <button id="review" variant="container" color="primary" type="submit">
+          <button id="review" variant="container" color="primary" type="submit" onClick={this.postFeedback}>
             submit
           </button>
         </form>

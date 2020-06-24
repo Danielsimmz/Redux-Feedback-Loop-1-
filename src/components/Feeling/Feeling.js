@@ -14,7 +14,7 @@ class Feeling extends Component {
   //set state to local variable
   state = {
     input: {
-      feeling: "",
+      feeling: 0,
     },
   };
 
@@ -29,11 +29,12 @@ class Feeling extends Component {
   //store input value in global state
   handleClick = () => {
     const { dispatch } = this.props;
-    dispatch({ type: "GET_FEELING", payload: this.state.input });
+    dispatch({ type: "GET_FEELING", payload: this.state.input.feeling });
+    console.log(this.state.input);
     //reset the state after submission
     this.setState({
       input: {
-        feeling: "",
+        feeling: 0,
       },
     });
   };
@@ -53,8 +54,8 @@ class Feeling extends Component {
         <form onSubmit={this.next}>
           <input
             value={this.state.input.feeling}
-            //type="number"
-            min="1"
+            type="number"
+            min="0"
             max="10"
             placeholder="Choose from 1-10"
             onChange={this.handleChange}
